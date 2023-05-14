@@ -356,7 +356,7 @@ window.addEventListener('load', function() {
             //score 
             context.fillText('Score: ' + this.game.score, 20, 40);
             // timer
-            const formattedTime = (this.game.gameTime * 0.001).toFixed(0);
+            const formattedTime = (this.game.gameTime * 0.001).toFixed(1);
             context.fillText('Timer: ' + formattedTime, 20, 100);
             // game over messages
             if (this.game.gameOver) {
@@ -374,6 +374,22 @@ window.addEventListener('load', function() {
                 context.fillText(message1, this.game.width * 0.5, this.game.height * 0.5 - 20);
                 context.font = '30px ' + this.fontFamily;
                 context.fillText(message2, this.game.width * 0.5, this.game.height * 0.5 + 20);
+
+                axios.post('https://arcade-backend.onrender.com/scoreboard/flappy/add', {
+                    name: 'Player',
+                    score: this.game.score
+                })
+                  .then(response => {
+                    console.log('Score submitted successfully', response.data);
+                  })
+                  .catch(error => {
+                    console.error('Error submitting score:', error);
+                  })
+
+                // window.parent.postMessage(
+                //     JSON.stringify({ steamPunkScore: this.game.score }),
+                //     "http://127.0.0.1:5173"
+                //   );
             }
             // ammo
             if (this.game.player.powerUp) context.fillStyle = '#39ff14';
