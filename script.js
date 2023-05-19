@@ -1,7 +1,4 @@
-
-
 window.addEventListener('load', function() {
-    // canvas setup
     const canvas = document.getElementById('canvas1');
     const ctx = canvas.getContext('2d');
     canvas.width = 1000;
@@ -399,7 +396,7 @@ window.addEventListener('load', function() {
                     );
                 }
             }
-            // ammo
+            //ammo
             if (this.game.player.powerUp) context.fillStyle = '#39ff14';
             for (let i = 0; i < this.game.ammo; i++) {
                 context.fillRect(20 + 5 * i, 50, 3, 20);
@@ -482,7 +479,6 @@ window.addEventListener('load', function() {
                                 }
                             }
                             if (!this.gameOver) this.score += enemy.score;
-                            // if (this.score > this.winningScore) this.gameOver = true;
                         }
                     }
                 })
