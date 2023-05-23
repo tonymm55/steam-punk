@@ -272,7 +272,6 @@ window.addEventListener('load', function() {
             context.drawImage(this.image, this.x + this.width, this.y);
         }
     }
-
     class Background {
         constructor(game) {
             this.game = game;
@@ -323,21 +322,18 @@ window.addEventListener('load', function() {
             context.drawImage(this.image, this.frameX * this.spriteWidth, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
         }
     }
-
     class SmokeExplosion extends Explosion {
         constructor(game, x, y){
             super(game, x, y);
             this.image = document.getElementById('smokeExplosion');
         }
     }
-
     class FireExplosion extends Explosion {
         constructor(game, x, y){
             super(game, x, y);
             this.image = document.getElementById('fireExplosion');  
         } 
     }
-
     class UI {
         constructor(game) {
             this.game = game;
@@ -353,7 +349,7 @@ window.addEventListener('load', function() {
             context.shadowOffsetY = 2;
             context.shadowColor = 'black';
             context.font = this.fontSize + 'px ' + this.fontFamily;
-            //score 
+            // score 
             context.fillText('Score: ' + this.game.score, 20, 40);
             // timer
             const formattedTime = (this.game.gameTime * 0.001).toFixed(1);
@@ -376,7 +372,7 @@ window.addEventListener('load', function() {
                 context.fillText(message2, this.game.width * 0.5, this.game.height * 0.5 + 20);
                 
                 if (!this.postRequestSent) {
-                    // Send POST request only once when game is over and request has not been sent
+                    // Send POST request once when game is over and request has not been sent
                   axios.post('https://arcade-backend.onrender.com/scoreboard/steampunk/add', {
                       name: 'Player',
                       score: this.game.score
@@ -392,11 +388,11 @@ window.addEventListener('load', function() {
   
                   window.parent.postMessage(
                       JSON.stringify({ steamPunkScore: this.game.score }),
-                      "http://127.0.0.1:5173"
+                      "https://arcade-game-room.netlify.app"
                     );
                 }
             }
-            //ammo
+            // ammo
             if (this.game.player.powerUp) context.fillStyle = '#39ff14';
             for (let i = 0; i < this.game.ammo; i++) {
                 context.fillRect(20 + 5 * i, 50, 3, 20);
@@ -529,7 +525,7 @@ window.addEventListener('load', function() {
 
     const game = new Game(canvas.width, canvas.height);
     let lastTime = 0;
-    //animation loop
+    // animation loop
     function animate(timeStamp) {
         const deltaTime = timeStamp - lastTime;
         lastTime = timeStamp;
